@@ -37,6 +37,19 @@ html,body{
     border: 1px solid white;
 }
 
+.waveform-title{
+    float: left;
+    margin: 5px;
+
+    font-size: 24px;
+    color: red;
+}
+
+.waveform{
+    width: 100%;
+    justify-content: stretch;
+}
+
 .parameters-container{
     width: 20%;
     height: 100%;

@@ -8,9 +8,18 @@
     <body>
         <div class="container">
             <div class="waveforms-container">
-                <div class="waveform-box"></div>
-                <div class="waveform-box"></div>
-                <div class="waveform-box"></div>
+                <div class="waveform-box">
+                    <span class="waveform-title">ECG I</span>
+                    <canvas class="waveform" id="waveform-ecg" width="800px"></canvas>
+                </div>
+                <div class="waveform-box">
+                    <span class="waveform-title">SpO2</span>
+                    <canvas class="waveform" id="waveform-spo2" width="800px"></canvas>
+                </div>
+                <div class="waveform-box">
+                    <span class="waveform-title">RESP</span>
+                    <canvas class="waveform" id="waveform-resp" width="800px"></canvas>
+                </div>
             </div>
 
             <div class="parameters-container">
