@@ -19,7 +19,7 @@ html,body{
     flex-direction: row;
 }
 
-.waveform-container{
+.waveforms-container{
     width: 80%;
     height: 100%;
 
@@ -37,7 +37,7 @@ html,body{
     border: 1px solid white;
 }
 
-.parameter-container{
+.parameters-container{
     width: 80%;
     height: 100%;
 
