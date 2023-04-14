@@ -35,6 +35,10 @@ html,body{
     height: 100%;
 
     border: 1px solid white;
+
+    display: flex;
+    position: relative;
+    justify-content: stretch;
 }
 
 .waveform-title{
