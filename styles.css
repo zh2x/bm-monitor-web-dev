@@ -66,4 +66,56 @@ html,body{
     height: 100%;
 
     border: 1px solid white;
+
+    display: flex;
+    position: relative;
+    justify-content: stretch;
+}
+
+.parameter-title{
+    float: left;
+    margin: 5px;
+
+    font-size: large;
+}
+
+.parameter-value{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 5px;
+
+    font-size: 36px;
+}
+
+.parameter-subox{
+    width: 50%;
+    height: 100%;
+
+    border: 1px solid white;
+
+    display: flex;
+    position: relative;
+    justify-content: stretch;
+}
+
+.ecg-color{
+    color: greenyellow;
+}
+
+.nibp-color{
+    color: white;
+}
+
+.spo2-color{
+    color: red;
+}
+
+.resp-color{
+    color: yellow;
+}
+
+.temperature-color{
+    color: white;
 }

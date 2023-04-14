@@ -9,25 +9,51 @@
         <div class="container">
             <div class="waveforms-container">
                 <div class="waveform-box">
-                    <span class="waveform-title">ECG I</span>
+                    <span class="waveform-title ecg-color">ECG I</span>
                     <canvas class="waveform" id="waveform-ecg" width="800px"></canvas>
                 </div>
                 <div class="waveform-box">
-                    <span class="waveform-title">SpO2</span>
+                    <span class="waveform-title spo2-color">SpO2</span>
                     <canvas class="waveform" id="waveform-spo2" width="800px"></canvas>
                 </div>
                 <div class="waveform-box">
-                    <span class="waveform-title">RESP</span>
+                    <span class="waveform-title" resp-color>RESP</span>
                     <canvas class="waveform" id="waveform-resp" width="800px"></canvas>
                 </div>
             </div>
 
             <div class="parameters-container">
-                <div class="parameter-box"></div>
-                <div class="parameter-box"></div>
-                <div class="parameter-box"></div>
-                <div class="parameter-box"></div>
-                <div class="parameter-box"></div>
+                <div class="parameter-box">
+                    <span class="parameter-title ecg-color">HR(bpm)</span>
+                    <span class="parameter-value ecg-color" id="parameter-heartrate">- -</span>
+                </div>
+
+                <div class="parameter-box">
+                    <span class="parameter-title nibp-color">NIBP(mmHg)</span>
+                    <span class="parameter-value nibp-color" id="parameter-nibp">- - -/- -</span>
+                </div>
+
+                <div class="parameter-box">
+                    <div class="parameter-subox">
+                        <span class="parameter-title spo2-color">SpO2(%)</span>
+                        <span class="parameter-value spo2-color" id="parameter-spo2">- -</span>
+                    </div>
+
+                    <div class="parameter-subox">
+                        <span class="parameter-title spo2-color">PR(bpm)</span>
+                        <span class="parameter-value spo2-color" id="parameter-pulserate">- -</span>
+                    </div>
+                </div>
+
+                <div class="parameter-box">
+                    <span class="parameter-title temperature-color">Temp(°C)</span>
+                    <span class="parameter-value temperature-color" id="parameter-temperature">- -</span>
+                </div>
+
+                <div class="parameter-box">
+                    <span class="parameter-title resp-color">resp(brpm)</span>
+                    <span class="parameter-value resp-color" id="parameter-resprate">- -</span>
+                </div>
             </div>
         </div>
     </body>
