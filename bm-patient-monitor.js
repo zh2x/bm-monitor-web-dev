@@ -32,20 +32,20 @@ class BMPatientMonitor{
         });
 
         while((this.chReceive == null) && (this.reconnectTime <= 5)){
-            console.log('bm-patient-monitor: ' + 'connect' + this.reconnectTime);
+            console.log('bm-patient-monitor: ', 'connect time ' + this.reconnectTime);
 
             try{
                 const server = await this.device.gatt.connect();
-                console.log('bm-patient-monitor: ' + server);
+                console.log('bm-patient-monitor: ', server);
 
                 const service = await server.getPrimaryService(this.UUID_SERVICE_COMM);
-                console.log('bm-patient-monitor: ' + service);
+                console.log('bm-patient-monitor: ', service);
 
                 this.chReceive = await service.getCharacteristic(this.UUID_CHARACTER_RECEIVE);
-                console.log('bm-patient-monitor: ' + this.chReceive);
+                console.log('bm-patient-monitor: ', this.chReceive);
             }
             catch(e){
-                console.log('bm-patient-monitor: ' + this.chReceive);
+                console.log('bm-patient-monitor: ', this.chReceive);
             }
 
             this.sleep(500);
