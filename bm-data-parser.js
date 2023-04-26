@@ -81,6 +81,32 @@ class BMDataParser {
                 case 'on_spo2_params_received':
                     callback(/*states*/pkg[4], /*SpO2*/pkg[5], /*pulse rate*/pkg[6]);
                     break;
+
+                case 'on_temp_params_received':
+                    callback(/*states*/pkg[4], /*temperature*/(pkg[5]*10 + pkg[6]) / 10.0);
+                    break;
+
+                case 'on_ecg_peak_received':
+                    callback();
+                    break;
+
+                case 'on_spo2_peak_received':
+                    callback();
+                    break;
+
+                case 'on_firmware_ver_received':
+                    break;
+
+                case 'on_hardware_ver_received':
+                    break;
+
+                case 'on_spo2_waveform_received':
+                    callback(/*ppg*/pkg[4]);
+                    break;
+
+                case 'on_resp_waveform_received':
+                    callback(/*ecg*/pkg[4]);
+                    break;
             }
         }
     }
