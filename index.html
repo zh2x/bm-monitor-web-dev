@@ -6,19 +6,23 @@
     </head>
 
     <body>
+        <div class="status-bar-container">
+            <div class="status-text">Bluetooth:</div>
+            <div id="bluetooth-status" class="status-text">Bluetooth:</div>
+        </div>
         <div class="container">
             <div class="waveforms-container">
                 <div class="waveform-box">
-                    <span class="waveform-title ecg-color">ECG I</span>
-                    <canvas class="waveform" id="waveform-ecg" width="800px"></canvas>
+                    <span class="waveform-title ecg-color">Lead I</span>
+                    <canvas class="waveform" id="waveform-ecg" width="1200px"></canvas>
                 </div>
                 <div class="waveform-box">
                     <span class="waveform-title spo2-color">SpO2</span>
-                    <canvas class="waveform" id="waveform-spo2" width="800px"></canvas>
+                    <canvas class="waveform" id="waveform-spo2" width="1200px"></canvas>
                 </div>
                 <div class="waveform-box">
                     <span class="waveform-title resp-color">RESP</span>
-                    <canvas class="waveform" id="waveform-resp" width="800px"></canvas>
+                    <canvas class="waveform" id="waveform-resp" width="1200px"></canvas>
                 </div>
             </div>
 
@@ -51,7 +55,7 @@
                 </div>
 
                 <div class="parameter-box">
-                    <span class="parameter-title resp-color">resp(brpm)</span>
+                    <span class="parameter-title resp-color">RESP(brpm)</span>
                     <span class="parameter-value resp-color" id="parameter-resp-rate">- -</span>
                 </div>
             </div>
