@@ -1,6 +1,8 @@
+const txBluetoothStatus = document.getElementById('bluetooth-status');
+
 const waveformECG = new BMWaveform(document.getElementById('waveform-ecg'), 'red', 250);
 const waveformSpO2 = new BMWaveform(document.getElementById('waveform-spo2'), 'red', 100);
-const waveformRESP = new BMWaveform(document.getElementById('waveform-resp'), 'yellow', 100);
+const waveformRESP = new BMWaveform(document.getElementById('waveform-resp'), 'yellow', 250);
 
 const paramHeartRate = document.getElementById('parameter-heart-rate');
 const paramNIBP = document.getElementById('parameter-nibp');
@@ -10,7 +12,7 @@ const paramTemperature = document.getElementById('parameter-temperature');
 const paramRespRate = document.getElementById('parameter-resp-rate');
 
 var dataParser = new BMDataParser();
-var patientMonitor = new BMPatientMonitor(dataParser);
+var patientMonitor = new BMPatientMonitor(dataParser, refreshBluetoothStatus);
 
 dataParser.registerCallback('on_ecg_waveform_received', (amp)=>{
     waveformECG.add(amp);
@@ -44,4 +46,8 @@ dataParser.registerCallback('on_temp_params_received', (states, temperature)=>{
 
 function onBtnSearchClick(){
     patientMonitor.connect();
+}
+
+function refreshBluetoothStatus(status){
+    txBluetoothStatus.innerHTML = status;
 }
