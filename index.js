@@ -70,12 +70,12 @@ function refreshBluetoothStatus(status){
 
 function updateWaveforms(){
     if(document.hidden){
-        for(waveform in waveforms){
+        for(let waveform of waveforms){
             waveform["waveform"].addArray(waveform["buffer"].splice(0, waveform["buffer"].length));
         }
     }
     else{
-        for(waveform in waveforms){
+        for(let waveform of waveforms){
             if(waveform["buffer"].length > waveform["slice_size"]){
                 waveform["waveform"].addArray(waveform["buffer"].splice(0, waveform["slice_size"]));
             }
