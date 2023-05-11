@@ -2,10 +2,12 @@
 class BMPatientMonitor{
     UUID_SERVICE_COMM = "49535343-fe7d-4ae5-8fa9-9fafd205e455";
     UUID_CHARACTER_RECEIVE = "49535343-1e4d-4bd9-ba61-23c647249616";
+    UUID_CHARACTER_SEND = "49535343-8841-43f4-a8d4-ecbe34729bb3";
 
     constructor(parser, refreshStatus){
         this.device = null;
         this.chReceive = null;
+        this.chSend = null;
         this.server = null;
         this.parser = parser;
         this.refreshStatus = refreshStatus;
@@ -27,9 +29,16 @@ class BMPatientMonitor{
         this.chReceive.startNotifications();
     }
 
+    startNIBP(){
+        if(this.chSend != null){
+            this.chSend.writeValue(new Uint8Array([0x55, 0xaa, 0x04, 0x02, 0x01, 0xf8]));
+        }
+    }
+
     async connect(){
         this.device = null;
         this.chReceive = null;
+        this.chSend = null;
         this.server = null;
 
         this.device = await navigator.bluetooth.requestDevice({
@@ -54,7 +63,10 @@ class BMPatientMonitor{
                 console.log('bm-patient-monitor: ', service);
 
                 this.chReceive = await service.getCharacteristic(this.UUID_CHARACTER_RECEIVE);
-                console.log('bm-patient-monitor: ', this.chReceive);
+                console.log('bm-patient-monitor: recv - ', this.chReceive);
+
+                this.chSend = await service.getCharacteristic(this.UUID_CHARACTER_SEND);
+                console.log('bm-patient-monitor: send - ', this.chSend);
             }
             catch(e){
                 console.log('bm-patient-monitor: ', this.chReceive);
