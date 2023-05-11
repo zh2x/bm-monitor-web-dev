@@ -1,8 +1,8 @@
 const txBluetoothStatus = document.getElementById('bluetooth-status');
 
-const waveformECG = new BMWaveform(document.getElementById('waveform-ecg'), 'red', 250);
-const waveformSpO2 = new BMWaveform(document.getElementById('waveform-spo2'), 'red', 100);
-const waveformRESP = new BMWaveform(document.getElementById('waveform-resp'), 'yellow', 250);
+const waveformECG = new BMWaveform(document.getElementById('waveform-ecg'), 'red', 250, 1);
+const waveformSpO2 = new BMWaveform(document.getElementById('waveform-spo2'), 'red', 100, 3);
+const waveformRESP = new BMWaveform(document.getElementById('waveform-resp'), 'yellow', 250, 3);
 
 const paramHeartRate = document.getElementById('parameter-heart-rate');
 const paramNIBP = document.getElementById('parameter-nibp');
@@ -14,16 +14,26 @@ const paramRespRate = document.getElementById('parameter-resp-rate');
 var dataParser = new BMDataParser();
 var patientMonitor = new BMPatientMonitor(dataParser, refreshBluetoothStatus);
 
+var ecgWaveformBuf = [];
+var spo2WaveformBuf = [];
+var respWaveformBuf = [];
+
+var waveforms = [
+    {"waveform" : waveformECG,  "buffer" : ecgWaveformBuf,  "slice_size" : 10},
+    {"waveform" : waveformSpO2, "buffer" : spo2WaveformBuf, "slice_size" : 2},
+    {"waveform" : waveformRESP, "buffer" : respWaveformBuf, "slice_size" : 2},
+];
+
 dataParser.registerCallback('on_ecg_waveform_received', (amp)=>{
-    waveformECG.add(amp);
+    ecgWaveformBuf.push(amp);
 });
 
 dataParser.registerCallback('on_spo2_waveform_received', (amp)=>{
-    waveformSpO2.add(amp);
+    spo2WaveformBuf.push(amp);
 });
 
 dataParser.registerCallback('on_resp_waveform_received', (amp)=>{
-    waveformRESP.add(amp);
+    respWaveformBuf.push(amp);
 });
 
 dataParser.registerCallback('on_ecg_params_received', (states, heartRate, respRate)=>{
@@ -44,10 +54,31 @@ dataParser.registerCallback('on_temp_params_received', (states, temperature)=>{
     paramTemperature.innerHTML = (temperature === 0) ? '- -.-' : temperature;
 });
 
+setInterval(updateWaveforms, 40);
+
 function onBtnSearchClick(){
     patientMonitor.connect();
 }
 
+function onBtnNIBPClick(){
+    patientMonitor.startNIBP();
+}
+
 function refreshBluetoothStatus(status){
     txBluetoothStatus.innerHTML = status;
+}
+
+function updateWaveforms(){
+    if(document.hidden){
+        for(waveform in waveforms){
+            waveform["waveform"].addArray(waveform["buffer"].splice(0, waveform["buffer"].length));
+        }
+    }
+    else{
+        for(waveform in waveforms){
+            if(waveform["buffer"].length > waveform["slice_size"]){
+                waveform["waveform"].addArray(waveform["buffer"].splice(0, waveform["slice_size"]));
+            }
+        }
+    }
 }
