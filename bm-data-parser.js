@@ -53,8 +53,19 @@ class BMDataParser {
             let packageData = this.rawBuffer.slice(packageStartIndex, packageEndIndex);
             this.rawBuffer.splice(0, packageEndIndex);
 
-            this.parsePackage(packageData);
+            if(this.checkSum(packageData)){
+                this.parsePackage(packageData);
+            }            
         }
+    }
+
+    checkSum(pkg){
+        var sum = 0;
+        for(let i = 2; i < pkg.length - 1; i++){
+            sum += pkg[i];
+        }
+        sum = (~sum) & 0xff;
+        return sum === pkg[pkg.length - 1];
     }
 
     parsePackage(pkg){
